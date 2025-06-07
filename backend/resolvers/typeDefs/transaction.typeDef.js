@@ -1,4 +1,4 @@
-const transactionTypeDef = `#graphql
+export default `#graphql
 type Transaction {
   _id: ID!
   userId: ID!
@@ -40,5 +40,3 @@ input UpdateTransactionInput {
   date: String
 }
 `
-
-export default transactionTypeDef
