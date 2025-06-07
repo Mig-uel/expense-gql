@@ -3,7 +3,7 @@ import { users } from '../data/data.js'
 const UserResolver = {
   Query: {
     users() {
-      return this.users()
+      return users
     },
   },
   Mutation: {},
