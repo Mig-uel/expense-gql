@@ -7,6 +7,7 @@ import { expressMiddleware } from '@apollo/server/express4'
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer'
 import { configDotenv } from 'dotenv'
 
+import connectDB from './db/connectDB.js'
 import mergedResolvers from './resolvers/index.js'
 import mergedTypeDefs from './resolvers/typeDefs/index.js'
 
@@ -31,4 +32,10 @@ app.use(
   })
 )
 
-await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve))
+connectDB()
+  .then(() =>
+    new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve)).then(
+      () => console.log('---- SERVER RUNNING ----')
+    )
+  )
+  .catch((error) => console.log(error))
