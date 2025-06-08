@@ -16,7 +16,7 @@ export default `#graphql
   }
 
   # mutations allowed on the type User
-  type Mutations {
+  type Mutation {
     signUp(input: SignUpInput!): User
     login(input: LoginInput!): User
     logout: LogoutResponse
