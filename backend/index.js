@@ -8,14 +8,17 @@ import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHt
 import connectMongo from 'connect-mongodb-session'
 import { configDotenv } from 'dotenv'
 import session from 'express-session'
+import { buildContext } from 'graphql-passport'
 import passport from 'passport'
 
 import connectDB from './db/connectDB.js'
+import passportConfig from './passport/passport.config.js'
 import mergedResolvers from './resolvers/index.js'
 import mergedTypeDefs from './resolvers/typeDefs/index.js'
-import { buildContext } from 'graphql-passport'
 
 configDotenv()
+passportConfig()
+
 const app = express()
 const httpServer = http.createServer(app)
 
