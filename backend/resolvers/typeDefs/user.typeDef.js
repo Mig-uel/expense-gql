@@ -10,7 +10,6 @@ export default `#graphql
 
   # queries allowed on the type User
   type Query {
-    users: [User!]
     authUser: User
     user(userId: ID!): User
   }
