@@ -3,14 +3,25 @@ import User from '../models/user.model.js'
 
 export default {
   Query: {
-    // user(userId: ID!) resolver
-    user(_, { userId }) {
-      return users.find((u) => u._id === userId)
+    async user(_, { userId }) {
+      try {
+        const user = await User.findById(userId)
+
+        return user
+      } catch (error) {
+        console.error('Error finding user.')
+        throw new Error(error.message || 'Internal server error.')
+      }
     },
 
     async authUser(_, __, ctx) {
       try {
-      } catch (error) {}
+        const user = await ctx.getUser()
+        return user
+      } catch (error) {
+        console.error('Error while authenticating user: ', error)
+        throw new Error(error.message || 'Internal server error.')
+      }
     },
   },
 
@@ -93,4 +104,6 @@ export default {
       }
     },
   },
+
+  // TODO => add user/transaction relation
 }
