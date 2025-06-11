@@ -7,6 +7,11 @@ export default {
     user(_, { userId }) {
       return users.find((u) => u._id === userId)
     },
+
+    async authUser(_, __, ctx) {
+      try {
+      } catch (error) {}
+    },
   },
 
   Mutation: {
@@ -73,11 +78,11 @@ export default {
       try {
         await ctx.logout()
 
-        req.session.destroy((err) => {
+        ctx.req.session.destroy((err) => {
           if (err) throw err
         })
 
-        res.clearCookie('connect.sid')
+        ctx.res.clearCookie('connect.sid')
 
         return {
           message: 'Logged out successfully.',
